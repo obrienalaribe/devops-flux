@@ -6,3 +6,6 @@ namePrefix: kustomize-
 resources:
 - nginx.yaml
 - nginx-svc.yaml
+
+commonAnnotations:
+  type: nginx-demo
