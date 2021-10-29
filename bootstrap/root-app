@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: root-app-uat
+  namespace: argocd
+spec:
+  description: Root App UAT
+  sourceRepos:
+  - https://github.com/obrienalaribe/devops-cicd
+  destinations:
+  - namespace: default
+    server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  - name: root-app-admin
+    policies:
+    - p, proj:seldon:seldon-admin, applications, get, seldon/*, allow
+    - p, proj:seldon:seldon-admin, applications, create, seldon/*, allow
+    - p, proj:seldon:seldon-admin, applications, update, seldon/*, allow
+    - p, proj:seldon:seldon-admin, applications, delete, seldon/*, allow
+    - p, proj:seldon:seldon-admin, applications, sync, seldon/*, allow
